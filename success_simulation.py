@@ -30,10 +30,9 @@ class SelfMade(Person):
         ]
 
     def learn(self):
-        mentor = SelfMade(
+        self.knowledge = SelfMade(
             treasure=1000, credentials=["STEM Degree"], knowledge=50, title="Manager"
-        )
-        return mentor.knowledge
+        ).knowledge
 
 
 class Normie(Person):
