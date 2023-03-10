@@ -16,8 +16,8 @@ class Person:
 
     work = apply_knowledge
 
-    def enjoy_success(self):
-        pass
+    def enjoy_life(self):
+        self.treasure -= 30
 
 
 class SelfMade(Person):
@@ -28,16 +28,15 @@ class SelfMade(Person):
         self.habits = [
             self.learn,
             self.apply_knowledge,
-            self.enjoy_success,
+            self.enjoy_life,
         ]
 
     def learn(self):
         """Everyone in your life is your mentor whether either of you realizes it."""
-        mentor = SelfMade(treasure=1000, credentials=["MBA"], knowledge=50, title="CEO")
+        mentor = SelfMade(
+            treasure=1000, credentials=["STEM Degree"], knowledge=50, title="Manager"
+        )
         return mentor.knowledge
-
-    def enjoy_success(self):
-        self.treasure -= 30
 
 
 class Normie(Person):
@@ -57,10 +56,14 @@ class Normie(Person):
         self.skills_obtained = []
 
         if self.want == "style":
-            credentials = ["Engineering Degree", "PMP certification"]
+            credentials = ["STEM Degree", "PMP certification"]
             title = "Director"
             covetee = SelfMade(self.treasure, credentials, {}, title)
-            self.habits = [covetee.enjoy_success]
+            self.habits = [
+                getattr(self, method.__name__)
+                for method in covetee.habits
+                if hasattr(self, method.__name__) and self.sounds_fun(method.__name__)
+            ]
 
         elif self.want == "substance":
             mentor = SelfMade(self.treasure, [], 0, "")
@@ -90,6 +93,12 @@ class Normie(Person):
 
     def __str__(self):
         return f"{self.__class__}"
+
+    @staticmethod
+    def sounds_fun(function_name: str) -> bool:
+        if function_name == "enjoy_life":
+            return True
+        return False
 
 
 def calculate_percent_success_rate(want):
