@@ -21,8 +21,6 @@ class Person:
 
 
 class SelfMade(Person):
-    """If you want to have what they have, don't do what they do, learn what they know and apply it."""
-
     def __init__(self, treasure: int, credentials: list, knowledge: int, title: str):
         super().__init__(treasure, credentials, knowledge, title)
         self.habits = [
@@ -32,7 +30,6 @@ class SelfMade(Person):
         ]
 
     def learn(self):
-        """Everyone in your life is your mentor whether either of you realizes it."""
         mentor = SelfMade(
             treasure=1000, credentials=["STEM Degree"], knowledge=50, title="Manager"
         )
@@ -40,8 +37,6 @@ class SelfMade(Person):
 
 
 class Normie(Person):
-    """What do you want - to look successful or to be successful?"""
-
     master_dict = {"coding": 5, "public speaking": 3, "leadership": 4, "etc": 0}
 
     def __init__(self, time_left, want):
